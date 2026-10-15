@@ -1,4 +1,5 @@
 import { NavLink, Routes, Route } from 'react-router-dom';
+import { GlobalProvider } from './context/GlobalContext.jsx'
 
 import HomePage from './Pages/HomePage.jsx';
 import ShopPage from './Pages/ShopPage.jsx';
@@ -11,25 +12,27 @@ function App() {
 
   return (
     <>
-      <header>
-        <NavLink to="/">
-          <img src="" alt="store-logo" className='store-logo' />
-        </NavLink>
-        <div className="searchbar">
-          <input type="text" />
-          <button>S</button>
-        </div>
-        <div className="product-buttons">
-          <button className="favorites">⭐</button>
-          <button className="shoplist">🛒</button>
-        </div>
-      </header>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/shop" element={<ShopPage />} />
-        <Route path="/shop/:id" element={<DetailPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <GlobalProvider>
+        <header>
+          <NavLink to="/">
+            <img alt="store-logo" className='store-logo' />
+          </NavLink>
+          <div className="searchbar">
+            <input type="text" />
+            <button>S</button>
+          </div>
+          <div className="product-buttons">
+            <button className="favorites">⭐</button>
+            <button className="shoplist">🛒</button>
+          </div>
+        </header>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/shop/:id" element={<DetailPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </GlobalProvider>
     </>
   )
 }
