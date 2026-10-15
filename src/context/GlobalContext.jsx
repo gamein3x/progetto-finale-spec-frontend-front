@@ -9,7 +9,7 @@ export function GlobalProvider({ children }) {
     const products = useProducts();
 
     return (
-        <GlobalContext.Provider value={{ products }}>
+        <GlobalContext.Provider value={{ ...products }}>
             {children}
         </GlobalContext.Provider>
     );
