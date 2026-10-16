@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { NavLink, Routes, Route } from 'react-router-dom';
 import { useGlobalContext } from './context/GlobalContext.jsx'
 
+import HomeProductCard from './components/HomeProductCard.jsx';
 import HomePage from './Pages/HomePage.jsx';
 import ShopPage from './Pages/ShopPage.jsx';
 import DetailPage from './Pages/DetailPage';
@@ -20,7 +21,7 @@ function App() {
       .filter(t =>
         t.title.toLowerCase().includes(searchQueary.toLowerCase()) ||
         t.category.toLowerCase().includes(searchQueary.toLowerCase()))
-  }, [searchQueary]);
+  }, [products, searchQueary]);
 
   return (
     <>
@@ -43,10 +44,7 @@ function App() {
       </header>
       <main>
         {sortedProducts.map(product => (
-          <div key={product.id}>
-            <h3>{product.title}</h3>
-            <p>{product.category}</p>
-          </div>
+          <HomeProductCard key={`${product.category}-${product.id}`} product={product} />
         ))}
       </main>
       <Routes>
