@@ -1,5 +1,7 @@
+import Favorites from "../components/Favorites";
+
 export default function HomePage() {
     return <>
-        <p>Hello there</p>
+        <Favorites />
     </>
 }
