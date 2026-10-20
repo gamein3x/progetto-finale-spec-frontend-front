@@ -15,17 +15,29 @@ export default function useProducts() {
             .then(res => res.json())
     };
 
+    async function fetchProduct(type, id) {
+        const res = await fetch(`${VITE_API_URL}/${type}s/${id}`);
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message);
+        return data[type];
+    }
+
     async function fetchProducts() {
         try {
             const [consoles, videogames] = await Promise.all([
                 fetchConsoles(),
-                fetchVideogames(),
+                fetchVideogames()
             ]);
-            setProducts([...consoles, ...videogames]);
+            setProducts([
+                ...consoles.map(c => ({ ...c, type: "console" })),
+                ...videogames.map(v => ({ ...v, type: "videogame" })),
+            ]);
         } catch (error) {
             console.error(error);
         }
     }
+
+
 
     useEffect(() => {
         fetchProducts()
@@ -33,5 +45,5 @@ export default function useProducts() {
 
     console.log(products);
 
-    return { products }
+    return { products, fetchProduct }
 }
