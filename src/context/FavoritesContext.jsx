@@ -1,9 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import useStorage from "../hooks/useStorage";
 
 const FavoritesContext = createContext();
 
 function FavoritesProvider({ children }) {
-    const [favorites, setFavorites] = useState([]);
+    const [favorites, setFavorites] = useStorage("favorites", []);
 
     const isSameProduct = (a, b) => a.id === b.id && a.type === b.type;
 
