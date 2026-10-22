@@ -11,6 +11,7 @@ export default function ShopPage() {
 
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortOrder, setSortOrder] = useState(1);
+    const [resultsNumber, setResultsNumber] = useState(0);
     const [showModal, setShowModal] = useState(false);
     // per non caricare in localStorage, aggiungo bottone per accesso in ogni lato dell'app più avanti
     const [productsToCompare, setProductsToCompare] = useStorage("productsToCompare", []);
@@ -76,17 +77,19 @@ export default function ShopPage() {
 
     }
 
+    const fullSearchResults = filteredProducts.map(product => (
+        <Link key={`${product.type}-${product.id}`} to={`/products/${product.type}/${product.id}`}>
+            <HomeProductCard product={product} />
+            <button onClick={(e) => toggleCompare(e, product)}>
+                {isInCompare(product) ? "Remove" : "Compare"}
+            </button>
+        </Link>
+    ));
+
     return (
         <main>
-            <button onClick={() => handleSort("title")} >A{sortIcon}</button>
-            {filteredProducts.map(product => (
-                <Link key={`${product.type}-${product.id}`} to={`/products/${product.type}/${product.id}`}>
-                    <HomeProductCard product={product} />
-                    <button onClick={(e) => toggleCompare(e, product)}>
-                        {isInCompare(product) ? "Remove" : "Compare"}
-                    </button>
-                </Link>
-            ))}
+            <button onClick={() => handleSort("title")} >{sortIcon}</button>
+            {filteredProducts.length === 0 ? "Nessun risultato trovato" : fullSearchResults}
             <Modal
                 content={productsToCompare.map(product => (<div key={`${product.type}-${product.id}`}
                     className='compare-card'>
