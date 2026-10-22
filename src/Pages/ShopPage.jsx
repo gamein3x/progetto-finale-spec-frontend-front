@@ -7,7 +7,7 @@ import Modal from '../components/Modal.jsx';
 import useStorage from '../hooks/useStorage.js';
 
 export default function ShopPage() {
-    const { products } = useGlobalContext();
+    const { products, fetchProduct } = useGlobalContext();
 
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortOrder, setSortOrder] = useState(1);
@@ -50,18 +50,29 @@ export default function ShopPage() {
             }),
         [products, sortBy, sortOrder, search]);
 
-    const toggleCompare = (event, product) => {
+    const toggleCompare = async (event, product) => {
         event.preventDefault();
         if (isInCompare(product)) {
             setProductsToCompare(prev => prev.filter(p => !isSameProduct(p, product)));
-        } else {
-            if (productsToCompare.length < 3) {
-                setProductsToCompare(prev => [...prev, product]);
-                if (productsToCompare.length === 0) {setShowModal(true)};
-            } else {
-                alert("You reached product limit.");
-            }
+            return
         }
+        if (productsToCompare.length >= 3) {
+            alert("You reached product limit.");
+            return
+        }
+        try {
+            const fullProduct = await fetchProduct(product.type, product.id);
+
+            setProductsToCompare(prev => {
+                if (prev.length >= 3 || prev.some(p => isSameProduct(p, product))) return prev;
+                return [...prev, { ...fullProduct, type: product.type }];
+            });
+
+            if (productsToCompare.length === 0) setShowModal(true);
+        } catch (error) {
+            console.error(error);
+        }
+
     }
 
     return (
@@ -77,9 +88,11 @@ export default function ShopPage() {
             ))}
             <Modal
                 content={productsToCompare.map(product => (
-                <div key={`${product.type}-${product.id}`}>
-                    <p>{product.title}</p>
-                </div>))}
+                    <div key={`${product.type}-${product.id}`}>
+                        <p>{product.title}</p>
+                        <p>{product.description}</p>
+                        <p>{product.price}</p>
+                    </div>))}
                 show={showModal}
                 onClose={() => setShowModal(false)}
             />
