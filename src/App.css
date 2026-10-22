@@ -46,3 +46,13 @@ body {
   aspect-ratio: 1;
   width: 10%;
 }
+
+/* Compare modal */
+
+.modal {
+  display: flex;
+}
+
+.compare-card {
+  flex-basis: 50%;
+}

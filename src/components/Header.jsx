@@ -1,5 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { NavLink, useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+
+const debounce = (callback, delay) => {
+    let timeout;
+    return (value) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            callback(value);
+        }, delay);
+    }
+};
+
 
 export default function Header() {
 
@@ -15,14 +26,17 @@ export default function Header() {
         if (isShopPage) setSearchQuery(searchParams.get("search") || "");
     }, [isShopPage, searchParams]);
 
-    const goToShop = (term, replace = false) => {
-        navigate(term ? `/shop?search=${encodeURIComponent(term)}` : "/shop", { replace });
-    };
+    const debouncedGoToShop = useCallback(
+        debounce(term => {
+            navigate(term ? `/shop?search=${encodeURIComponent(term)}` : "/shop", { replace: true });
+        }, 500),
+        [navigate]
+    );
 
     const handleChange = e => {
         const value = e.target.value;
         setSearchQuery(value);
-        if (isShopPage) goToShop(value, true); // live results only on the shop page
+        if (isShopPage) debouncedGoToShop(value, true); // live results only on the shop page
     };
 
     const handleSubmit = e => {

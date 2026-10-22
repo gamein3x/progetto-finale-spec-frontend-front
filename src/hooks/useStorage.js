@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useStorage( itemKey, initialValue ) {
     const [ state, setState ] = useState(() => {
@@ -6,15 +6,13 @@ export default function useStorage( itemKey, initialValue ) {
         if (prevState){
             return JSON.parse(prevState);
         } else {
-            localStorage.setItem(itemKey, JSON.stringify(initialValue));
             return initialValue;
         }
     });
 
-    const changeState = (newState) => {
-        setState(newState);
-        localStorage.setItem(itemKey, JSON.stringify(newState));
-    }
+    useEffect(() => {
+        localStorage.setItem(itemKey, JSON.stringify(state));
+    }, [state, itemKey]);
 
-    return [state, changeState];
+    return [state, setState];
 }

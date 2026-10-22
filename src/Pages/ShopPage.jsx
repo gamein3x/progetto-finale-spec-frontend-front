@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext.jsx';
 
@@ -12,7 +12,8 @@ export default function ShopPage() {
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortOrder, setSortOrder] = useState(1);
     const [showModal, setShowModal] = useState(false);
-    const [productsToCompare, setProductsToCompare] = useState([]);
+    // per non caricare in localStorage, aggiungo bottone per accesso in ogni lato dell'app più avanti
+    const [productsToCompare, setProductsToCompare] = useStorage("productsToCompare", []);
 
 
     const [searchParams] = useSearchParams();
@@ -68,7 +69,7 @@ export default function ShopPage() {
                 return [...prev, { ...fullProduct, type: product.type }];
             });
 
-            if (productsToCompare.length === 0) setShowModal(true);
+            setShowModal(true);
         } catch (error) {
             console.error(error);
         }
@@ -87,12 +88,25 @@ export default function ShopPage() {
                 </Link>
             ))}
             <Modal
-                content={productsToCompare.map(product => (
-                    <div key={`${product.type}-${product.id}`}>
-                        <p>{product.title}</p>
-                        <p>{product.description}</p>
-                        <p>{product.price}</p>
-                    </div>))}
+                content={productsToCompare.map(product => (<div key={`${product.type}-${product.id}`}
+                    className='compare-card'>
+                    <h5>{product.title}</h5>
+                    <p>{product.description}</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Price</th>
+                                <th>Condition</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><p>{product.price}</p></td>
+                                <td><p>{product.condition}</p></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>))}
                 show={showModal}
                 onClose={() => setShowModal(false)}
             />
