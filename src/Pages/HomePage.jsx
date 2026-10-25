@@ -1,7 +1,7 @@
-import Favorites from "../components/Favorites";
+import HomeBanner from "../components/HomeBanner";
 
 export default function HomePage() {
     return <>
-        <Favorites />
+        <HomeBanner />
     </>
 }

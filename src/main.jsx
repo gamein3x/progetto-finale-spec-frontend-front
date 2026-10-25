@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import { GlobalProvider } from './context/GlobalContext.jsx'
 import { FavoritesProvider } from './context/FavoritesContext.jsx'
+import { CompareProvider } from './context/CompareContext.jsx'
 import './index.css'
 import App from './App.jsx'
 
@@ -10,9 +11,11 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <GlobalProvider>
       <FavoritesProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <CompareProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </CompareProvider>
       </FavoritesProvider>
     </GlobalProvider>
   </StrictMode>,

@@ -1,58 +1,362 @@
+:root {
+  --color-primary: #d5d9e1;
+  --color-secondary: #643730;
+  --color-special: #f28500;
+  --color-selected: #f2b500;
+}
+
 body {
   margin: 0;
+  background: var(--color-primary);
+  font-family: "DM Sans", sans-serif;
+}
+
+main {
+  padding-top: 90px;
 }
 
 /* Header CSS */
 
 .header {
-  position: relative;
+  position: fixed;
   width: 100%;
-  height: 120px;
-  background: green;
-  margin-bottom: 10%;
+  height: 90px;
+  background-image: url("./images/cobblestone_texture.jpg");
+  background-repeat: repeat-x;
+  background-size: contain;
+  box-shadow: 2px 11px 56px -5px rgba(0, 0, 0, 0.67);
+  z-index: 3;
 }
 
 .header-nav {
   position: relative;
-  margin-left: 20%;
+  margin-left: 35%;
   margin-right: 5%;
   display: flex;
-  justify-content: space-between;
-  align-items: end;
-  bottom: -40px;
+  justify-content: end;
+  align-items: center;
+  bottom: -18px;
+  gap: 20px;
 }
 
 .store-logo {
   position: absolute;
+  z-index: 4;
 }
 
-.store-logo-img {
-  width: 150px;
-  margin: 8px 15px;
+.logo-img-main {
+  width: 190px;
+  margin: 10px;
+}
+
+.logo-img-main::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 15px 23px 5px rgba(0,0,0,0.4);
+}
+
+.logo-img-secondary {
+  width: 140px;
+  position: relative;
+  top: -28px;
+  left: -15px;
 }
 
 .searchbar {
-  width: 420px;
+  width: 470px;
+  min-width: 290px;
   height: 40px;
+  position: relative;
+  top: -3px;
 }
 
 .search-input {
-  width: 80%;
+  width: 100%;
   height: 100%;
+  border-radius: 50px;
+  text-align: center;
+  font-size: larger;
+  background: var(--color-primary);
+  border: 3px solid var(--color-special);
+  transition: transform 0.2s;
+  position: relative;
+  outline: black solid 1.5px;
+}
+
+.search-input:focus {
+  outline: var(--color-selected) solid 2px;
+  margin: 0;
 }
 
 .search-btn {
   margin: 5px;
+  width: 55px;
+  height: 46.8px;
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+  background: var(--color-primary);
+  border: 3px solid var(--color-special);
+  border-left: 2px;
+  position: absolute;
+  right: -14px;
+  top: -4.9px;
+  z-index: 10;
+}
+
+.search-btn img {
+  transition: transform 0.2s;
+}
+
+.search-btn:hover img {
+  transform: scale(110%);
+}
+
+.search-btn:active img {
+  transform: scale(90%);
+}
+
+.search-icon {
+  position: relative;
+  z-index: 5;
+  width: 120%;
+  image-rendering: pixelated;
+  height: 120%;
+  top: -5px;
+  left: -5px;
+}
+
+.icon-btn {
+  position: relative;
+  border: none;
+  padding: 0;
+  background-color: transparent;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  image-rendering: pixelated;
+  background-image: url('./images/button_img.png');
+  transition: 0.2s;
+}
+
+.icon-btn:hover {
+  transform: scale(105%);
+}
+
+.icon-btn:active {
+  transform: scale(90%);
+}
+
+.btn-icon {
+  position: relative;
+  top: -1.5px;
+  width: 58%;
+  height: 48%;
+  object-fit: contain;
+  pointer-events: none;
+  image-rendering: pixelated;
+  background-image: url('./images/button_img.png');
+}
+
+.btn-icon-count {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    border-radius: 15px;
+    background: var(--color-special);
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    color: white;
+}
+
+.product-buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.favorites-btn {
+  height: 52px;
   aspect-ratio: 1;
-  width: 10%;
+}
+
+.compare-btn {
+  height: 52px;
+  aspect-ratio: 1;
+  color: white;
+}
+
+/* Favorites panel */
+
+.favorites-panel {
+  position: fixed;
+  top: 90px; /* same as .header height */
+  left: 0;
+  right: 0;
+  z-index: 2; /* below .header (3) */
+  padding: 20px 5%;
+  background: var(--color-primary);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+.favorites-track {
+  display: flex;
+  gap: 25px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.favorites-track .prod-contentbox {
+  flex: 0 0 250px; /* fixed width so cards stay on one row and scroll */
+}
+
+/* Shop page */
+
+.product-results-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: center;
+}
+
+.product-card {
+  background-color: #f28500a4;
+  border-radius: 20px;
+  padding: 10px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  flex-basis: 30%;
+  height: 220px;
+  min-width: 352px;
 }
 
 /* Compare modal */
 
+.modal-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.6);
+}
+
 .modal {
   display: flex;
+  gap: 16px;
+  width: min(1100px, 100%);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 24px;
+  background: white;
+  color: #222;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.modal-container>button {
+  padding: 8px 24px;
+  border: none;
+  border-radius: 8px;
+  background: var(--color-secondary);
+  color: white;
+  cursor: pointer;
 }
 
 .compare-card {
-  flex-basis: 50%;
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.compare-card table {
+  width: 100%;
+  margin-top: auto;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.compare-card th,
+.compare-card td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #eee;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    flex-direction: column;
+  }
+}
+
+/* Home banner slider */
+
+.home-banner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.banner-track {
+  display: flex;
+  transition: transform 0.6s ease-in-out;
+}
+
+.banner-slide {
+  position: relative;
+  flex: 0 0 100%;
+  display: block;
+}
+
+.banner-slide img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  display: block;
+}
+
+.banner-title {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.banner-dots {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.banner-dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+}
+
+.banner-dot.active {
+  background: #fff;
 }

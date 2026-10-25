@@ -1,6 +1,7 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext.jsx';
+import { useComparedProducts } from '../context/CompareContext.jsx';
 
 import HomeProductCard from '../components/HomeProductCard.jsx';
 import Modal from '../components/Modal.jsx';
@@ -9,21 +10,18 @@ import useStorage from '../hooks/useStorage.js';
 export default function ShopPage() {
     const { products, fetchProduct } = useGlobalContext();
 
+    const {productsToCompare, toggleCompare, isInCompare } = useComparedProducts();
+
     const [sortBy, setSortBy] = useState("createdAt");
     const [sortOrder, setSortOrder] = useState(1);
     const [resultsNumber, setResultsNumber] = useState(0);
     const [showModal, setShowModal] = useState(false);
     // per non caricare in localStorage, aggiungo bottone per accesso in ogni lato dell'app più avanti
-    const [productsToCompare, setProductsToCompare] = useStorage("productsToCompare", []);
-
 
     const [searchParams] = useSearchParams();
     const search = (searchParams.get("search") || "").toLowerCase();
 
     const sortIcon = sortOrder === 1 ? "↓" : "↑";
-
-    const isSameProduct = (a, b) => a.id === b.id && a.type === b.type;
-    const isInCompare = (product) => productsToCompare.some(p => isSameProduct(p, product));
 
     const handleSort = (field) => {
         if (sortBy === field) {
@@ -52,33 +50,12 @@ export default function ShopPage() {
             }),
         [products, sortBy, sortOrder, search]);
 
-    const toggleCompare = async (event, product) => {
-        event.preventDefault();
-        if (isInCompare(product)) {
-            setProductsToCompare(prev => prev.filter(p => !isSameProduct(p, product)));
-            return
-        }
-        if (productsToCompare.length >= 3) {
-            alert("You reached product limit.");
-            return
-        }
-        try {
-            const fullProduct = await fetchProduct(product.type, product.id);
-
-            setProductsToCompare(prev => {
-                if (prev.length >= 3 || prev.some(p => isSameProduct(p, product))) return prev;
-                return [...prev, { ...fullProduct, type: product.type }];
-            });
-
-            setShowModal(true);
-        } catch (error) {
-            console.error(error);
-        }
-
-    }
-
+    useEffect(() => {
+        if (productsToCompare.length > 1) setShowModal(true);
+    }, [productsToCompare]);
+    
     const fullSearchResults = filteredProducts.map(product => (
-        <Link key={`${product.type}-${product.id}`} to={`/products/${product.type}/${product.id}`}>
+        <Link key={`${product.type}-${product.id}`} to={`/products/${product.type}/${product.id}`} className='product-card'>
             <HomeProductCard product={product} />
             <button onClick={(e) => toggleCompare(e, product)}>
                 {isInCompare(product) ? "Remove" : "Compare"}
@@ -87,9 +64,11 @@ export default function ShopPage() {
     ));
 
     return (
-        <main>
+        <div className='shop-page-container'>
             <button onClick={() => handleSort("title")} >{sortIcon}</button>
-            {filteredProducts.length === 0 ? "Nessun risultato trovato" : fullSearchResults}
+            <div className="product-results-container">
+                {filteredProducts.length === 0 ? "Nessun risultato trovato" : fullSearchResults}
+            </div>
             <Modal
                 content={productsToCompare.map(product => (<div key={`${product.type}-${product.id}`}
                     className='compare-card'>
@@ -113,6 +92,6 @@ export default function ShopPage() {
                 show={showModal}
                 onClose={() => setShowModal(false)}
             />
-        </main>
+        </div>
     );
 }

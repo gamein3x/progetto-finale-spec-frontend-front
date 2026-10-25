@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext } from "react";
 import useStorage from "../hooks/useStorage";
 
 const FavoritesContext = createContext();
@@ -55,12 +55,7 @@ function FavoritesProvider({ children }) {
 
 }
 
-function useFavorites() {
-    return useContext(FavoritesContext);
-};
-
 export {
     FavoritesContext,
-    FavoritesProvider,
-    useFavorites
+    FavoritesProvider
 };
