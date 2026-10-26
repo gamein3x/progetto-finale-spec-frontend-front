@@ -28,10 +28,21 @@ export default function useProducts() {
                 fetchConsoles(),
                 fetchVideogames()
             ]);
-            setProducts([
+
+            const list = [
                 ...consoles.map(c => ({ ...c, type: "console" })),
                 ...videogames.map(v => ({ ...v, type: "videogame" })),
-            ]);
+            ];
+
+            const results = await Promise.allSettled(
+                list.map(item => fetchProduct(item.type, item.id)));
+            return results.map((result, i) => {
+                if (result.status === "fulfilled") {
+                    return { ...list[i], ...result.value, type: list[i].type };
+                }
+                console.error(`Details failed for ${list[i].type} ${list[i].id}`, result.reason);
+                return list[i];
+            });
         } catch (error) {
             console.error(error);
         }
@@ -41,6 +52,7 @@ export default function useProducts() {
 
     useEffect(() => {
         fetchProducts()
+        .then(fullProducts => setProducts(fullProducts));
     }, []);
 
     console.log(products);
