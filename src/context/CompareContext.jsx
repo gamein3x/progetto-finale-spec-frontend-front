@@ -11,10 +11,14 @@ function CompareProvider({ children }) {
     const isSameProduct = (a, b) => a.id === b.id && a.type === b.type;
     const isInCompare = (product) => productsToCompare.some(p => isSameProduct(p, product));
 
+    const removeFromCompare = (product) => {
+        setProductsToCompare(prev => prev.filter(p => !isSameProduct(p, product)));
+    }
+
     const toggleCompare = async (event, product) => {
         event.preventDefault();
         if (isInCompare(product)) {
-            setProductsToCompare(prev => prev.filter(p => !isSameProduct(p, product)));
+            removeFromCompare(product);
             return
         }
         if (productsToCompare.length >= 3) {
@@ -37,7 +41,8 @@ function CompareProvider({ children }) {
                 value={{
                     productsToCompare,
                     toggleCompare,
-                    isInCompare
+                    isInCompare,
+                    removeFromCompare
                 }}
             >
                 {children}
