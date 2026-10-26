@@ -1,0 +1,222 @@
+[
+    {
+        "id": 1,
+        "title": "Nintendo 64 Console",
+        "category": "Consoles",
+        "image": "/images/consoles/nintendo-64-console.png",
+        "price": 59.99,
+        "description": "The classic 64-bit home video game console by Nintendo, featuring iconic 3D gaming.",
+        "release_date": "1996-09-29",
+        "brand": "Nintendo",
+        "condition": "Used"
+    },
+    {
+        "id": 2,
+        "title": "Nintendo 64 Console",
+        "category": "Consoles",
+        "image": "/images/consoles/nintendo-64-console.png",
+        "price": 89.99,
+        "description": "The classic 64-bit home video game console by Nintendo, featuring iconic 3D gaming.",
+        "release_date": "1996-09-29",
+        "brand": "Nintendo",
+        "condition": "As new"
+    },
+    {
+        "id": 3,
+        "title": "Nintendo 64 Console",
+        "category": "Consoles",
+        "image": "/images/consoles/nintendo-64-console.png",
+        "price": 26.99,
+        "description": "The classic 64-bit home video game console by Nintendo, featuring iconic 3D gaming.",
+        "release_date": "1996-09-29",
+        "brand": "Nintendo",
+        "condition": "Damaged"
+    },
+    {
+        "id": 4,
+        "title": "Nintendo 64 Console",
+        "category": "Consoles",
+        "image": "/images/consoles/nintendo-64-console.png",
+        "price": 54.99,
+        "description": "The classic 64-bit home video game console by Nintendo, featuring iconic 3D gaming.",
+        "release_date": "1996-09-29",
+        "brand": "Nintendo",
+        "condition": "Used"
+    },
+    {
+        "id": 5,
+        "title": "PlayStation",
+        "category": "Consoles",
+        "image": "/images/consoles/playstation.png",
+        "price": 49.99,
+        "description": "Sony's revolutionary home console that popularized CD-based gaming.",
+        "release_date": "1995-09-09",
+        "brand": "Sony",
+        "condition": "Used"
+    },
+    {
+        "id": 6,
+        "title": "PlayStation",
+        "category": "Consoles",
+        "image": "/images/consoles/playstation.png",
+        "price": 79.99,
+        "description": "Sony's revolutionary home console that popularized CD-based gaming.",
+        "release_date": "1995-09-09",
+        "brand": "Sony",
+        "condition": "As new"
+    },
+    {
+        "id": 7,
+        "title": "PlayStation",
+        "category": "Consoles",
+        "image": "/images/consoles/playstation.png",
+        "price": 24.99,
+        "description": "Sony's revolutionary home console that popularized CD-based gaming.",
+        "release_date": "1995-09-09",
+        "brand": "Sony",
+        "condition": "Damaged"
+    },
+    {
+        "id": 8,
+        "title": "PlayStation",
+        "category": "Consoles",
+        "image": "/images/consoles/playstation.png",
+        "price": 44.99,
+        "description": "Sony's revolutionary home console that popularized CD-based gaming.",
+        "release_date": "1995-09-09",
+        "brand": "Sony",
+        "condition": "Used"
+    },
+    {
+        "id": 9,
+        "title": "GameBoy Color",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy-color.png",
+        "price": 59.99,
+        "description": "The iconic handheld console by Nintendo with a color screen.",
+        "release_date": "1998-10-21",
+        "brand": "Nintendo",
+        "condition": "As new"
+    },
+    {
+        "id": 10,
+        "title": "GameBoy Color",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy-color.png",
+        "price": 14.99,
+        "description": "The iconic handheld console by Nintendo with a color screen.",
+        "release_date": "1998-10-21",
+        "brand": "Nintendo",
+        "condition": "Damaged"
+    },
+    {
+        "id": 11,
+        "title": "GameBoy Color",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy-color.png",
+        "price": 39.99,
+        "description": "The iconic handheld console by Nintendo with a color screen.",
+        "release_date": "1998-10-21",
+        "brand": "Nintendo",
+        "condition": "Used"
+    },
+    {
+        "id": 12,
+        "title": "GameBoy Color",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy-color.png",
+        "price": 64.99,
+        "description": "The iconic handheld console by Nintendo with a color screen.",
+        "release_date": "1998-10-21",
+        "brand": "Nintendo",
+        "condition": "As new"
+    },
+    {
+        "id": 13,
+        "title": "GameBoy",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy.png",
+        "price": 34.99,
+        "description": "Nintendo's original handheld console with a monochrome screen, home of Tetris and Pokémon.",
+        "release_date": "1989-04-21",
+        "brand": "Nintendo",
+        "condition": "Used"
+    },
+    {
+        "id": 14,
+        "title": "GameBoy",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy.png",
+        "price": 69.99,
+        "description": "Nintendo's original handheld console with a monochrome screen, home of Tetris and Pokémon.",
+        "release_date": "1989-04-21",
+        "brand": "Nintendo",
+        "condition": "As new"
+    },
+    {
+        "id": 15,
+        "title": "GameBoy",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy.png",
+        "price": 12.99,
+        "description": "Nintendo's original handheld console with a monochrome screen, home of Tetris and Pokémon.",
+        "release_date": "1989-04-21",
+        "brand": "Nintendo",
+        "condition": "Damaged"
+    },
+    {
+        "id": 16,
+        "title": "GameBoy",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy.png",
+        "price": 29.99,
+        "description": "Nintendo's original handheld console with a monochrome screen, home of Tetris and Pokémon.",
+        "release_date": "1989-04-21",
+        "brand": "Nintendo",
+        "condition": "Used"
+    },
+    {
+        "id": 17,
+        "title": "GameBoy",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy.png",
+        "price": 74.99,
+        "description": "Nintendo's original handheld console with a monochrome screen, home of Tetris and Pokémon.",
+        "release_date": "1989-04-21",
+        "brand": "Nintendo",
+        "condition": "As new"
+    },
+    {
+        "id": 18,
+        "title": "GameBoy",
+        "category": "Consoles",
+        "image": "/images/consoles/gameboy.png",
+        "price": 16.99,
+        "description": "Nintendo's original handheld console with a monochrome screen, home of Tetris and Pokémon.",
+        "release_date": "1989-04-21",
+        "brand": "Nintendo",
+        "condition": "Damaged"
+    },
+    {
+        "id": 19,
+        "title": "Sega Mega Drive",
+        "category": "Consoles",
+        "image": "/images/consoles/sega-mega-drive.png",
+        "price": 44.99,
+        "description": "Sega's 16-bit home console, famous for Sonic the Hedgehog and fast-paced arcade action.",
+        "release_date": "1988-10-29",
+        "brand": "Sega",
+        "condition": "Used"
+    },
+    {
+        "id": 20,
+        "title": "Sega Mega Drive",
+        "category": "Consoles",
+        "image": "/images/consoles/sega-mega-drive.png",
+        "price": 84.99,
+        "description": "Sega's 16-bit home console, famous for Sonic the Hedgehog and fast-paced arcade action.",
+        "release_date": "1988-10-29",
+        "brand": "Sega",
+        "condition": "As new"
+    }
+]

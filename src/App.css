@@ -231,6 +231,7 @@ main {
 }
 
 .filters-container button {
+  color: white;
   cursor: pointer;
   border: 2px solid var(--color-special);
   background-color: var(--color-special);
@@ -251,7 +252,7 @@ main {
   flex-wrap: wrap;
   gap: 25px;
   justify-content: center;
-  margin: 0 20px;
+  margin: 10px 20px;
 }
 
 .product-card {
