@@ -36,7 +36,7 @@ export default function ShopPage() {
     const search = (searchParams.get("search") || "").toLowerCase();
     const normalizedSearch = normalize(search);
 
-    const sortIcon = sortOrder === 1 ? "↓" : "↑";
+    const sortIcon = sortOrder === 1 ? "Z↓" : "A↑";
 
     const handleSort = (field) => {
         if (sortBy === field) {

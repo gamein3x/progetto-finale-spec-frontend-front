@@ -4,6 +4,7 @@
   --color-secondary: #643730;
   --color-special: #f28500;
   --color-special-darker: #c6720b;
+  --color-special-light: #f8ae54;
   --color-selected: #f2b500;
 }
 
@@ -213,11 +214,6 @@ main {
   padding-bottom: 10px;
 }
 
-.favorites-track .prod-contentbox {
-  flex: 0 0 250px;
-  /* fixed width so cards stay on one row and scroll */
-}
-
 /* Shop page */
 
 .filters-container {
@@ -254,6 +250,107 @@ main {
   flex-basis: 30%;
   height: 220px;
   min-width: 352px;
+  text-decoration: none;
+}
+
+.product-card h2 {
+  color: var(--color-special-light);
+  position: relative;
+  bottom: -20px;
+}
+
+.prod-contentbox {
+  width: 100%;
+}
+
+.prod-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.prod-tags {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.prod-tag {
+  padding: 3px 10px;
+  border-radius: 26px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 26px;
+  position: relative;
+  bottom: -4px;
+}
+
+.prod-tag-price {
+  background: var(--color-special);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.prod-tag-condition {
+  background: rgba(0, 0, 0, 0.45);
+  color: var(--color-selected);
+  border: 1px solid var(--color-selected);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.prod-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+}
+
+.prod-actions button {
+  transition: 0.2s;
+}
+
+.prod-actions button:hover {
+  transform: scale(105%);
+}
+
+.prod-actions button:active {
+  transform: scale(90%);
+}
+
+.prod-actions .active {
+  color: var(--color-special-light) !important;
+  background-color: var(--color-special-darker) !important;
+}
+
+.favorite-btn {
+  height: 40px;
+  background: var(--color-special-light);
+  border: 2px dotted var(--color-special);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.favorite-btn {
+  width: 40px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.favorite-btn img {
+  width: 28px;
+  aspect-ratio: 1;
+}
+
+.compare-btn-card {
+  width: 73px;
+  height: 26px;
+  color: var(--color-special-darker);
+  font-weight: 600;
+  background-color: var(--color-special-light);
+  border: 2px dotted var(--color-special);
+  border-radius: 25px;
 }
 
 /* Compare modal */

@@ -57,26 +57,26 @@ export default function Header() {
         navigate(term ? `/shop?search=${encodeURIComponent(term)}` : "/shop");
     };
 
-    const SPIN_DURATION = 800; // ms, set this to your GIF's actual length
+    const SPIN_DURATION = 800;
 
     const [isSpinning, setIsSpinning] = useState(false);
     const [spinKey, setSpinKey] = useState(0);
     const prevFavCount = useRef(favorites.length);
+    const spinTimer = useRef(null);
     const compareIcon = productsToCompare.length >= 2 ? compareActive : compareStill;
 
     useEffect(() => {
         if (favorites.length > prevFavCount.current) {
             setIsSpinning(true);
             setSpinKey(k => k + 1); //immagine rimontata al primo frame
-            const timer = setTimeout(() => setIsSpinning(false), SPIN_DURATION);
-            prevFavCount.current = favorites.length;
-            return () => clearTimeout(timer);
+            clearTimeout(spinTimer.current); // ricarica countdown se già a frame 2
+            spinTimer.current = setTimeout(() => setIsSpinning(false), SPIN_DURATION);
         }
         prevFavCount.current = favorites.length;
-    }, [favorites.length]);
+}, [favorites.length]);
 
-    return (
-        <>
+return (
+    <>
         <header className='header'>
             <NavLink to="/" className='store-logo'>
                 <img src="src\images\logo_img_main.png" alt="logo-img-main" className='logo-img-main' />
@@ -110,6 +110,6 @@ export default function Header() {
             </div>
         </header>
         {isFavoritesOpen && <Favorites />}
-        </>
-    );
+    </>
+);
 }

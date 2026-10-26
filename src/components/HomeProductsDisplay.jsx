@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext.jsx';
 
-import HomeProductCard from './HomeProductCard.jsx';
+import HomeProductCard from './HomeProductCard.jsx'; 
 
 function getRandomItems(array, count) {
     // Fisher-Yates shuffle su una copia, poi prendo i primi "count"
@@ -27,12 +27,7 @@ export default function HomeProductsDisplay() {
         <h1>Rediscover old gems...</h1>
         <div className="home-products-container">
             {randomVideogames.map(product => (
-                <Link
-                    key={`${product.type}-${product.id}`}
-                    to={`/products/${product.type}/${product.id}`}
-                    className='product-card'>
-                    <HomeProductCard product={product} />
-                </Link>
+                    <HomeProductCard product={product} key={`${product.type}-${product.id}`}/>
             ))}
         </div>
     </div>
