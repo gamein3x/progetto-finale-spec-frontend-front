@@ -1,11 +1,8 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { useGlobalContext } from '../context/GlobalContext.jsx';
-import { useComparedProducts } from '../context/CompareContext.jsx';
 
 import HomeProductCard from '../components/HomeProductCard.jsx';
-import Modal from '../components/Modal.jsx';
-import useStorage from '../hooks/useStorage.js';
 
 const normalize = str => (str || "").toLowerCase().replace(/\s+/g, "");
 
@@ -21,12 +18,9 @@ const categories = ["Videogames", "Consoles"];
 export default function ShopPage() {
     const { products, fetchProduct, fetchCategoryKeys } = useGlobalContext();
 
-    const { productsToCompare, toggleCompare, isInCompare } = useComparedProducts();
-
     const [sortBy, setSortBy] = useState("title");
     const [sortOrder, setSortOrder] = useState(1);
     const [resultsNumber, setResultsNumber] = useState(0);
-    const [showModal, setShowModal] = useState(false);
     const [category, setCategory] = useState(null);
     const [categoryKeys, setCategoryKeys] = useState(null);
     const [brandFilter, setBrandFilter] = useState(null);
@@ -75,10 +69,6 @@ export default function ShopPage() {
             }),
         [products, sortBy, sortOrder, normalizedSearch, categoryKeys, brandFilter]);
 
-    useEffect(() => {
-        if (productsToCompare.length > 1) setShowModal(true);
-    }, [productsToCompare]);
-
     const fullSearchResults = filteredProducts.map(product => (
         <HomeProductCard product={product} key={`${product.type}-${product.id}`} />
     ));
@@ -105,29 +95,6 @@ export default function ShopPage() {
             <div className="product-results-container">
                     {filteredProducts.length === 0 ? "Nessun risultato trovato" : fullSearchResults}
             </div>
-            <Modal
-                content={productsToCompare.map(product => (<div key={`${product.type}-${product.id}`}
-                    className='compare-card'>
-                    <h5>{product.title}</h5>
-                    <p>{product.description}</p>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Price</th>
-                                <th>Condition</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><p>{product.price}</p></td>
-                                <td><p>{product.condition}</p></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>))}
-                show={showModal}
-                onClose={() => setShowModal(false)}
-            />
         </div>
     );
 }

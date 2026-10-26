@@ -3,6 +3,8 @@ import { NavLink, useNavigate, useLocation, useSearchParams } from 'react-router
 import useFavorites from '../hooks/useFavorites';
 import { useComparedProducts } from '../context/CompareContext';
 import Favorites from './Favorites';
+import Modal from './Modal';
+import CompareProducts from './CompareProducts';
 
 import buttonImg from '../images/button_img.png';
 import starStill from '../images/star_still.png';
@@ -33,6 +35,7 @@ export default function Header() {
 
     const [searchQuery, setSearchQuery] = useState(searchParams.get("search") || "");
     const [isFavoritesOpen, setIsFavoritesOpen] = useState(false);
+    const [isCompareOpen, setIsCompareOpen] = useState(false);
 
     useEffect(() => {
         if (isShopPage) setSearchQuery(searchParams.get("search") || "");
@@ -118,7 +121,7 @@ return (
                         <img key={spinKey} src={isSpinning ? starSpinning : starStill} alt="Favorites" className="btn-icon" />
                         {favorites.length > 0 && <span className='btn-icon-count'>{favorites.length}</span>}
                     </button>
-                    <button className="icon-btn compare-btn">
+                    <button className="icon-btn compare-btn" onClick={() => setIsCompareOpen(true)}>
                         <img src={compareIcon} alt="Compare" className="btn-icon" />
                         {productsToCompare.length > 0 && <span className='btn-icon-count'>{productsToCompare.length}</span>}
                     </button>
@@ -126,6 +129,11 @@ return (
             </div>
         </header>
         {isFavoritesOpen && <Favorites panelRef={favoritesPanelRef} />}
+        <Modal
+            content={<CompareProducts />}
+            show={isCompareOpen}
+            onClose={() => setIsCompareOpen(false)}
+        />
     </>
 );
 }
