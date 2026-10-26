@@ -220,6 +220,24 @@ main {
 
 /* Shop page */
 
+.filters-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.filters-container button {
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.filters-container button.active {
+  opacity: 1;
+  outline: 2px solid #fff;
+}
+
 .product-results-container {
   display: flex;
   flex-wrap: wrap;
@@ -228,7 +246,6 @@ main {
 }
 
 .product-card {
-  background-color: #f28500a4;
   border-radius: 20px;
   padding: 10px;
   display: flex;

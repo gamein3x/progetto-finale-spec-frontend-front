@@ -5,15 +5,28 @@ const { VITE_API_URL } = import.meta.env;
 export default function useProducts() {
     const [products, setProducts] = useState([]);
 
-    function fetchConsoles() {
-        return fetch(`${VITE_API_URL}/consoles`)
+    function fetchConsoles(query = "") {
+        return fetch(`${VITE_API_URL}/consoles${query}`)
             .then(res => res.json())
     };
 
-    function fetchVideogames() {
-        return fetch(`${VITE_API_URL}/videogames`)
+    function fetchVideogames(query = "") {
+        return fetch(`${VITE_API_URL}/videogames${query}`)
             .then(res => res.json())
     };
+
+    // restituisce le chiavi `${type}-${id}` dei prodotti della categoria richiesta
+    async function fetchCategoryKeys(category) {
+        const query = `?category=${encodeURIComponent(category)}`;
+        const [consoles, videogames] = await Promise.all([
+            fetchConsoles(query),
+            fetchVideogames(query)
+        ]);
+        return [
+            ...consoles.map(c => `console-${c.id}`),
+            ...videogames.map(v => `videogame-${v.id}`),
+        ];
+    }
 
     async function fetchProduct(type, id) {
         const res = await fetch(`${VITE_API_URL}/${type}s/${id}`);
@@ -57,5 +70,5 @@ export default function useProducts() {
 
     console.log(products);
 
-    return { products, fetchProduct }
+    return { products, fetchProduct, fetchCategoryKeys }
 }

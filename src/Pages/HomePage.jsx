@@ -9,7 +9,7 @@ export default function HomePage() {
             <div className="about-us-text-container">
                 <h1>The Tavern is Online!</h1>
                 <p>Whether you want to re-live your childhood memories or discover games from before your time,
-                    the RetroGaming Tavern is the place for you. <br />
+                    the <b>RetroGaming Tavern</b> is the place for you. <br />
                     Since our opening in 2012 as a local retro game store in Toronto, we believed videogames are a form of art that
                     needs to be preserved. While looking through our inventory, you can be sure that every product avaliable has been
                     checked for quality and restored to the best of our abilities, in order to deliver you these amazing experiences as they
