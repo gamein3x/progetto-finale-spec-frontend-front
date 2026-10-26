@@ -197,13 +197,11 @@ main {
 .favorites-panel {
   position: fixed;
   top: 90px;
-  /* same as .header height */
   left: 0;
   right: 0;
   z-index: 2;
-  /* below .header (3) */
-  padding: 20px 5%;
-  background: var(--color-primary);
+  padding-top: 20px;
+  background: var(--color-primary-lighter);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
@@ -211,7 +209,15 @@ main {
   display: flex;
   gap: 25px;
   overflow-x: auto;
-  padding-bottom: 10px;
+  padding: 10px;
+}
+
+.empty-favorites-text {
+  font-family: "Geist Pixel", sans-serif;
+  color: var(--color-special);
+  font-size: 32px;
+  margin-left: 2%;
+  letter-spacing: 5px;
 }
 
 /* Shop page */
@@ -251,6 +257,12 @@ main {
   height: 220px;
   min-width: 352px;
   text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: 0.5s;
+}
+
+.product-results-container a:hover, .home-products-container a:hover {
+  transform: scale(105%) !important;
 }
 
 .product-card h2 {
@@ -477,6 +489,7 @@ main {
   line-height: 50px;
   text-decoration: none;
   left: 16%;
+  bottom: 1rem;
 }
 
 .home-to-shop-link p {

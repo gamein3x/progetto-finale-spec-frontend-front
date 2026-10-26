@@ -75,6 +75,21 @@ export default function Header() {
         prevFavCount.current = favorites.length;
 }, [favorites.length]);
 
+    const favoritesPanelRef = useRef(null);
+    const favoritesBtnRef = useRef(null);
+
+    useEffect(() => {
+        if (!isFavoritesOpen) return;
+        const handleClickOutside = e => {
+            // il bottone è escluso, altrimenti il suo onClick riaprirebbe subito il pannello
+            if (favoritesPanelRef.current?.contains(e.target)) return;
+            if (favoritesBtnRef.current?.contains(e.target)) return;
+            setIsFavoritesOpen(false);
+        };
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => document.removeEventListener("mousedown", handleClickOutside);
+    }, [isFavoritesOpen]);
+
 return (
     <>
         <header className='header'>
@@ -97,6 +112,7 @@ return (
                 <div className="product-buttons">
                     <button
                         className="icon-btn favorites-btn"
+                        ref={favoritesBtnRef}
                         onClick={() => setIsFavoritesOpen(open => !open)}
                     >
                         <img key={spinKey} src={isSpinning ? starSpinning : starStill} alt="Favorites" className="btn-icon" />
@@ -109,7 +125,7 @@ return (
                 </div>
             </div>
         </header>
-        {isFavoritesOpen && <Favorites />}
+        {isFavoritesOpen && <Favorites panelRef={favoritesPanelRef} />}
     </>
 );
 }
